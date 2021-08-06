@@ -10,14 +10,17 @@ import os
 option = Options()
 option.headless = True
 
-driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe",options=option)
+#driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe",options=option)
+driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe")
 
-#driver = webdriver.Chrome()
-
-url = "https://contratos.comprasnet.gov.br/transparencia/terceirizados"
-
-driver.get(url)
-
-#cases = driver.find_element_by_xpath('//*[@id="crudTable"]/tbody/tr[2]/td[1]/span/text()')
-
-#print(cases)
+# enter keyword to search
+keyword = "geeksforgeeks"
+  
+# get geeksforgeeks.org
+driver.get("https://www.geeksforgeeks.org/")
+  
+# get element 
+element = driver.find_element_by_link_text("Courses")
+  
+# get href attribute
+print(element.get_attribute('href'))

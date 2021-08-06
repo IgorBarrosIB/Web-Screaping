@@ -1,26 +1,34 @@
-#PIP: 
-# pip install requests2
-# pip install pandas
-# pip install lxml
-# pip install beautifulsoup4
-# pip install selenium 
-
-#Dependecias do projeto 
+import time
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 import json
-
-# Grab content from URL (Pegar conteúdo HTML a partir da URL)
-url = "https://stats.nba.com/players/traditional/?PerMode=Totals&Season=2019-20&SeasonType=Regular%20Season&sort=PLAYER_NAME&dir=-1"
+import os
 
 option = Options()
 option.headless = True
-#driver = webdriver.Firefox(options=option)
-driver = webdriver.Firefox()
 
-driver.get("https://stats.nba.com/players/traditional/?PerMode=Totals&Season=2019-20&SeasonType=Regular%20Season&sort=PLAYER_NAME&dir=-1")
+#driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe",options=option)
+driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe")
+
+#driver = webdriver.Chrome()
+
+url = "https://contratos.comprasnet.gov.br/transparencia/terceirizados"
+
+driver.get(url)
+
+time.sleep(2)
+
+tabela = driver.find_element_by_xpath("//div[@id='crudTable_wrapper']//div[@class='col-sm-12']//table")
+html_content = tabela.get_attribute('outerHTML')
+print(html_content)
+
 driver.quit()
+
+
+
+
+
 

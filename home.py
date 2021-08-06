@@ -10,7 +10,8 @@ import os
 option = Options()
 option.headless = True
 
-driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe",options=option)
+#driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe",options=option)
+driver = webdriver.Chrome(executable_path=r"C:\Program Files\Google\Chrome\Application\chromedriver.exe")
 
 #driver = webdriver.Chrome()
 
@@ -18,6 +19,16 @@ url = "https://contratos.comprasnet.gov.br/transparencia/terceirizados"
 
 driver.get(url)
 
-#cases = driver.find_element_by_xpath('//*[@id="crudTable"]/tbody/tr[2]/td[1]/span/text()')
+time.sleep(2)
 
-#print(cases)
+tabela = driver.find_element_by_xpath("//div[@class='overflow-hidden']")
+html_content = tabela.get_attribute('outerHTML')
+print(html_content)
+
+driver.quit()
+
+
+
+
+
+
