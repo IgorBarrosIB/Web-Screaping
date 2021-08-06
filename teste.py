@@ -27,14 +27,23 @@ html_content = dados.get_attribute('outerHTML')
 
 # Parsear o conteúdo HTML - BeautifulSoup
 soup = BeautifulSoup(html_content, 'html.parser')
-informacao = soup.findAll('span')
-print(soup)
 
+# Pegando os nomes das colunas da tabela
+colunas = {i: col.getText() for i, col in enumerate(soup.find('table', {'id': 'crudTable'}).find('thead').findAll('th'))}
+colunas_names = [col.getText() for col in soup.find('table', {'id': 'crudTable'}).find('tbody').findAll('td')]
 
-# 3. Estruturar conteúdo em um Data Frame - Pandas
-df_full = pd.read_html(str(informacao))[0].head
-df = df_full[['Órgão', 'CPF', 'Nome', 'Função', 'Salário']]
-df.columns = ['Órgão','CPF', 'Nome', 'Função', 'Salário']
+# Criando um DataFrame com os nomes das colunas
+dados = pd.DataFrame(columns=colunas_names)
+
+# Pegando os dados da tabela por linha
+for i in range(len(soup.find('table', {'id': 'crudTable'}).find('thead').findAll('th'))):
+    linha = soup.find('table', {'id': 'crudTable'}).find('tbody').findAll('td')[i].getText().split('\n')[1:]
+    inserir_linha = pd.DataFrame(linha).T.rename(columns=colunas)
+    #dados = pd.concat([dados, inserir_linha], ignore_index=True)
+
+# É tetra!
+print(linha)
+
 
 
 driver.quit()
