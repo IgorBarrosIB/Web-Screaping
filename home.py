@@ -28,13 +28,13 @@ html_content = dados.get_attribute('outerHTML')
 # Parsear o conteúdo HTML - BeautifulSoup
 soup = BeautifulSoup(html_content, 'html.parser')
 informacao = soup.findAll('span')
-print(soup)
 
 
 # 3. Estruturar conteúdo em um Data Frame - Pandas
 df_full = pd.read_html(str(informacao))[0].head
 df = df_full[['Órgão', 'CPF', 'Nome', 'Função', 'Salário']]
 df.columns = ['Órgão','CPF', 'Nome', 'Função', 'Salário']
+print(df_full)
 
 
 driver.quit()

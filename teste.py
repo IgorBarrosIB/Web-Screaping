@@ -35,6 +35,8 @@ colunas_names = [col.getText() for col in soup.find('table', {'id': 'crudTable'}
 # Criando um DataFrame com os nomes das colunas
 dados = pd.DataFrame(columns=colunas_names)
 
+print(dados)
+
 # Pegando os dados da tabela por linha
 for i in range(len(soup.find('table', {'id': 'crudTable'}).find('thead').findAll('th'))):
     linha = soup.find('table', {'id': 'crudTable'}).find('tbody').findAll('td')[i].getText().split('\n')[1:]
@@ -42,7 +44,7 @@ for i in range(len(soup.find('table', {'id': 'crudTable'}).find('thead').findAll
     #dados = pd.concat([dados, inserir_linha], ignore_index=True)
 
 # É tetra!
-print(linha)
+
 
 
 
