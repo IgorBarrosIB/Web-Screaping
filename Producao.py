@@ -38,11 +38,11 @@ table = soup.find(id='crudTable')
 df_full = pd.read_html(str(table))[0]
 df = df_full[['Órgão', 'Unidade Gestora', 'Número Contrato', 'CPF', 'Nome', 'Função', 'Jornada', 'Salário', 'Data Início', 'Situação']]
 df.columns = ['Órgão', 'Unidade Gestora', 'Número Contrato', 'CPF', 'Nome', 'Função', 'Jornada', 'Salário', 'Data Início', 'Situação']
-#consulta = df.query('Órgão=="44207 - INST.CHICO MENDES DE CONSER.DA BIODIVERSID "')
 
 # Transforma os dados em um Dicionario de dados próprio
 consulta = {}
 consulta['informacao'] = df.to_dict('records')
+# print(consulta)
 driver.quit()
 
 # Converter e salvar em um arquivo JSON
@@ -50,10 +50,3 @@ js = json.dumps(consulta)
 fp = open('consulta.json', 'w')
 fp.write(js)
 fp.close()
-
-
-
-
-
-
-
