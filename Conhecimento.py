@@ -26,6 +26,10 @@ time.sleep(2)
 dados = driver.find_element_by_xpath("//div[@id='crudTable_wrapper']//div[@class='col-sm-12']")
 html_content = dados.get_attribute('outerHTML')
 
+# Selecionar todos os valores 
+span_xpath = "//select[@name='crudTable_length']//option[@value='-1']"
+span_element = driver.find_element_by_xpath(span_xpath).click()
+time.sleep(400)
 
 # Parsear o conteúdo HTML - BeautifulSoup
 soup = BeautifulSoup(html_content, 'html.parser')
